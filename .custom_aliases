@@ -1,0 +1,45 @@
+# Clear the terminal
+alias c="clear"
+
+# Activate base python environment
+alias s="source ~/anaconda3/bin/activate"
+
+# Reload the shell
+alias reload="source ~/.zshrc"
+
+# Lauch Chrome
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+# Copy the current working directory in the clipboard
+alias cpwd="pwd | tr -d '\n' | pbcopy"
+
+# List all ports Listening
+alias llport="netstat -tulpn | grep LISTEN"
+
+# Lauch the keyboard initializer
+alias initkeyboard="sudo open /System/Library/CoreServices/KeyboardSetupAssistant.app/Contents/MacOS/KeyboardSetupAssistant"
+
+# Create a map from a markdown file using its header
+alias markmap="npx markmap-lib"
+
+# List files usage in a directory 
+alias duh="du -h -d 1"
+
+# Call the pip installer from the current python
+alias ppip="python -m pip"
+
+# Print each PATH entry on a separate line
+# from: https://github.com/mathiasbynens/dotfiles/blob/main/.aliases
+alias path='echo -e ${PATH//:/\\n}'
+
+# Kill all the tabs in Chrome to free up memory
+# from: https://github.com/mathiasbynens/dotfiles/blob/main/.aliases
+# see: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Enable aliases to be sudo’ed
+# from: https://github.com/mathiasbynens/dotfiles/blob/main/.aliases
+alias sudo='sudo '
+
+# Open with typora
+alias typora="open -a typora"
