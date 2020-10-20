@@ -1,0 +1,21 @@
+function r2lport {
+emulate -L ksh # need this to work in zsh
+LOCALPORT=6006
+REMOTEPORT=6006
+SERVER=orleans
+OPTIND=1
+while getopts 'l:r:s:' flag; do
+  case "${flag}" in
+    l) LOCALPORT="${OPTARG}" ;;
+    r) REMOTEPORT="${OPTARG}" ;;
+    s) SERVER="${OPTARG}" ;;
+    ?)
+      echo "script usage: r2lport [-l localport] [-r remoteport] [-s server]" >&2 && return;;
+  esac
+done
+OPTIND=1
+
+echo "Publishing $SERVER's remote port $REMOTEPORT to local port $LOCALPORT"
+
+ssh -t -L "$LOCALPORT:localhost:$REMOTEPORT" $SERVER
+}
