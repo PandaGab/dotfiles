@@ -1,3 +1,6 @@
+# On compute server, might need to had this path to grant access to zsh functions
+# export FPATH="/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/share/zsh/5.2/functions:$FPATH"
+
 source ~/.custom_aliases
 source ~/.custom_functions
 
