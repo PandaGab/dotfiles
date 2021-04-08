@@ -1,6 +1,9 @@
 source ~/.custom_aliases
 source ~/.custom_functions
 
+# Initialize the autocompletion
+autoload -Uz compinit && compinit -i
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
