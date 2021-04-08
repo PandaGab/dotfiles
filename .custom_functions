@@ -1,21 +1,38 @@
 function r2lport {
-emulate -L ksh # need this to work in zsh
-LOCALPORT=6006
-REMOTEPORT=6006
-SERVER=orleans
-OPTIND=1
-while getopts 'l:r:s:' flag; do
-  case "${flag}" in
-    l) LOCALPORT="${OPTARG}" ;;
-    r) REMOTEPORT="${OPTARG}" ;;
-    s) SERVER="${OPTARG}" ;;
-    ?)
-      echo "script usage: r2lport [-l localport] [-r remoteport] [-s server]" >&2 && return;;
-  esac
-done
-OPTIND=1
+  emulate -L ksh # need this to work in zsh
+  LOCALPORT=6006
+  REMOTEPORT=6006
+  SERVER=orleans
+  OPTIND=1
+  while getopts 'l:r:s:' flag; do
+    case "${flag}" in
+      l) LOCALPORT="${OPTARG}" ;;
+      r) REMOTEPORT="${OPTARG}" ;;
+      s) SERVER="${OPTARG}" ;;
+      ?)
+        echo "script usage: r2lport [-l localport] [-r remoteport] [-s server]" >&2 && return;;
+    esac
+  done
+  OPTIND=1
 
-echo "Publishing $SERVER's remote port $REMOTEPORT to local port $LOCALPORT"
+  echo "Publishing $SERVER's remote port $REMOTEPORT to local port $LOCALPORT"
 
-ssh -t -L "$LOCALPORT:localhost:$REMOTEPORT" $SERVER
+  ssh -t -L "$LOCALPORT:localhost:$REMOTEPORT" $SERVER
+}
+
+# This function is used to enable or disable tabnine extension in jupyter notebook
+# https://github.com/codota/jupyter-tabnine
+function jupyter-tabnine {
+  EORD="$1"
+  if [[ $EORD == 'enable' ]] 
+  then
+    echo "Jupyter's tabnine extension enabled"
+  elif [[ $EORD == 'disable' ]]
+  then
+    echo "Jupyter's tabnine extension disabled"
+  else
+    echo "script usage: jupyter-tabnine [enable] [disable]" >&2 && return
+  fi
+  jupyter nbextension $EORD --py jupyter_tabnine --user
+  jupyter serverextension $EORD --py jupyter_tabnine --user
 }
