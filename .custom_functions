@@ -36,3 +36,31 @@ function jupyter-tabnine {
   jupyter nbextension $EORD --py jupyter_tabnine --user
   jupyter serverextension $EORD --py jupyter_tabnine --user
 }
+
+# This function will update the requirements.txt file
+# for the current python venv
+function venv-update-requirements {
+  # Get the current python env
+  PYTHONPATH=$(which python)
+
+  # With this if statemente, we check if we are in a venv
+  if [[ -f $(dirname $PYTHONPATH)/activate ]]; then
+      VENVFOLDER="$(dirname "$PYTHONPATH")"
+      VENVFOLDER="$(dirname "$VENVFOLDER")"
+      FILE=$VENVFOLDER/requirements.txt
+      echo "Generating $FILE\nfor the venv $VENVFOLDER"
+  else;
+      echo "The current python interpreter doesn't seem to be a venv.\nExiting."
+      return
+  fi
+
+  if [[ -f $FILE ]]; then
+      echo 'The file already exists, do you want to'
+      rm -i $FILE
+  fi
+
+  # Generating the actual file
+  python -m pip freeze > $FILE
+
+  echo "requirements.txt have been generated."
+}
