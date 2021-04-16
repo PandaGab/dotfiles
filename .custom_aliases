@@ -1,8 +1,11 @@
+# alias python="/usr/local/bin/python3"
+# alias pip="python -m pip"
+
 # Clear the terminal
 alias c="clear"
 
 # Activate base python environment
-alias s="source ~/anaconda3/bin/activate"
+# alias s="source ~/dev/venv-python/base/bin/activate"
 
 # Reload the shell
 alias reload="source ~/.zshrc"
