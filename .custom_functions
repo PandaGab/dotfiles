@@ -67,25 +67,26 @@ function venv-update-requirements {
 
 function pyenv {
     # This function will switch to the specify python env
+    BASE="$HOME/dev/python-venv/"
     function usage()
     {
         echo "Pyenv will activate a Python virtual environement"
-        echo "It will look for the <venv> in the folder \"~/dev/venv-python\""
+        echo "It will look for the <venv> in the folder \"$BASE\""
         echo ""
         echo "Usage: pyenv <venv>"
         echo ""
     }
 
-    BASE="$HOME/dev/venv-python/"
     # Should not have more than one argument
     if [ "$#" -ge 2 ]; then
         usage
         return
-    fi
-
-    if [ -z "$1" ]; then
+    elif [ -z "$1" ]; then
         # If no arguments, use the default venv
-        VENVFOLDER=$BASE
+        VENVFOLDER=$BASE/base
+    elif [[ "$1" == -h || "$1" == --help ]]; then
+        usage
+        return
     elif [ -d "$1" ]; then
         # Use the given directory as the venv
         VENVFOLDER=$1
