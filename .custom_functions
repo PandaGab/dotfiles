@@ -64,3 +64,45 @@ function venv-update-requirements {
 
   echo "requirements.txt have been generated."
 }
+
+function pyenv {
+    # This function will switch to the specify python env
+    function usage()
+    {
+        echo "Pyenv will activate a Python virtual environement"
+        echo "It will look for the <venv> in the folder \"~/dev/venv-python\""
+        echo ""
+        echo "Usage: pyenv <venv>"
+        echo ""
+    }
+
+    BASE="$HOME/dev/venv-python/"
+    # Should not have more than one argument
+    if [ "$#" -ge 2 ]; then
+        usage
+        return
+    fi
+
+    if [ -z "$1" ]; then
+        # If no arguments, use the default venv
+        VENVFOLDER=$BASE
+    elif [ -d "$1" ]; then
+        # Use the given directory as the venv
+        VENVFOLDER=$1
+    else;
+        VENVFOLDER=$1
+        if [ -d "$BASE$1" ]; then
+            VENVFOLDER="$BASE$1"
+        else;
+            echo "The venv $VENVFOLDER doesn't exist in $BASE\nExiting."
+            return
+        fi
+    fi
+
+    if [ -f "$VENVFOLDER/bin/activate" ]; then
+        # Activate the environement
+        source "$VENVFOLDER/bin/activate"
+    else;
+        echo "$VENVFOLDER doesn't contain the file $VENVFOLDER/bin/activate.\nExiting."
+    fi
+}
