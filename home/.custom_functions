@@ -65,7 +65,7 @@ function venv-update-requirements {
   echo "requirements.txt have been generated."
 }
 
-function pyenv {
+function pyenvgab {
     # This function will switch to the specify python env
     BASE="$HOME/dev/python-venv/"
     function usage()
