@@ -5,7 +5,13 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export FPATH="/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/share/zsh/5.2/functions:$FPATH"
 
 # Initialize pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 
 source ~/.custom_aliases
 source ~/.custom_functions
@@ -88,6 +94,7 @@ plugins=(
   dotenv
   osx
   tmux
+  pyenv
 )
 
 source $ZSH/oh-my-zsh.sh
