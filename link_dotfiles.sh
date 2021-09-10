@@ -11,14 +11,15 @@ for FILE in $(ls -A1 home); do
     if [[ -L $FILEPATH ]] || [[ -f $FILEPATH ]]; then
         echo "$HOME/$FILE already exists."
         read -p "Do you want to replace it? [y/n]" -n 1 -r
-        echo # move to a new line
+        echo "";  echo "" # add a blank line
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             rm "$HOME/$FILE"
             ln -s "${PWD}/home/$FILE" "$HOME/$FILE"
         fi
     else
-        echo not there
-        #ln -s "${PWD}/home/$FILE" "$HOME/$FILE"
+        echo "Linking to $HOME/$FILE"
+        ln -s "${PWD}/home/$FILE" "$HOME/$FILE"
+        echo ""; echo "" # add a blank line
     fi
 done
 
@@ -38,16 +39,19 @@ if [[ -d $VSCODE_USER_SETTINGS_FOLDER ]]; then
         if [[ -L $SETTINGPATH ]] || [[ -f $SETTINGPATH ]]; then
             echo "$SETTINGPATH already exists."
             read -p "Do you want to replace it? [y/n]" -n 1 -r
-            echo    # move to a new line
+            echo ""; echo "" # add a blank line
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 rm "$SETTINGPATH"
                 ln -s "${PWD}/vscode/$SETTINGFILE" "$SETTINGPATH"
             fi
         else
+            echo "Linking to ${PWD}/vscode/$SETTINGFILE"
             ln -s "${PWD}/vscode/$SETTINGFILE" "$SETTINGPATH"
+            echo ""; echo "" # add a blank line
         fi
     done
 else
     echo "Can't link vscode settings."
     echo "$VSCODE_USER_SETTINGS_FOLDER not found"
+    echo ""; echo "" # add a blank line
 fi
