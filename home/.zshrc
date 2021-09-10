@@ -1,3 +1,6 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # On compute server, might need to had this path to grant access to zsh functions
 # export FPATH="/cvmfs/soft.computecanada.ca/nix/var/nix/profiles/16.09/share/zsh/5.2/functions:$FPATH"
 
@@ -9,9 +12,6 @@ source ~/.custom_functions
 
 # Initialize the autocompletion
 autoload -Uz compinit && compinit -i
-
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Add Latex Librairies
 export PATH=/Library/TeX/texbin:$PATH
