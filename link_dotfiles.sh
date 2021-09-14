@@ -1,8 +1,12 @@
 #!/bin/sh
 
 # # Install Oh-My-Zsh
-if [[ !-d "$HOME/.oh-my-zsh" ]]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+    read -p "Do you want to install oh-my-zsh it? [y/n]" -n 1 -r
+    echo "";  echo "" # add a blank line
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    fi
 fi
 
 #######################
