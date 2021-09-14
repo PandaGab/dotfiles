@@ -107,3 +107,57 @@ function pyenvgab {
         echo "$VENVFOLDER doesn't contain the file $VENVFOLDER/bin/activate.\nExiting."
     fi
 }
+
+
+function swap() {
+    # from https://tldp.org/LDP/abs/html/sample-bashrc.html
+    # Swap 2 filenames around, if they exist (from Uzi's bashrc).
+    local TMPFILE=tmp.$$
+
+    [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
+    [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
+    [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
+
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+function extract() {
+    # from https://tldp.org/LDP/abs/html/sample-bashrc.html
+    # Handy Extract Program
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1     ;;
+            *.tar.gz)    tar xvzf $1     ;;
+            *.bz2)       bunzip2 $1      ;;
+            *.rar)       unrar x $1      ;;
+            *.gz)        gunzip $1       ;;
+            *.tar)       tar xvf $1      ;;
+            *.tbz2)      tar xvjf $1     ;;
+            *.tgz)       tar xvzf $1     ;;
+            *.zip)       unzip $1        ;;
+            *.Z)         uncompress $1   ;;
+            *.7z)        7z x $1         ;;
+            *)           echo "'$1' cannot be extracted via >extract<" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}
+
+function ii() {
+    # from https://tldp.org/LDP/abs/html/sample-bashrc.html
+    # Get current host related info.
+    echo -e "\nYou are logged on ${BRed}$HOST"
+    echo -e "\n${BRed}Additionnal information:$NC " ; uname -a
+    echo -e "\n${BRed}Users logged on:$NC " ; w -hi |
+            cut -d " " -f1 | sort | uniq
+    echo -e "\n${BRed}Current date :$NC " ; date
+    echo -e "\n${BRed}Machine stats :$NC " ; uptime
+    # echo -e "\n${BRed}Memory stats :$NC " ; free -h
+    # echo -e "\n${BRed}Diskspace :$NC " ; mydf / $HOME
+    # echo -e "\n${BRed}Local IP Address :$NC" ; my_ip
+    echo -e "\n${BRed}Open connections :$NC "; netstat -pan --inet;
+    echo
+}
