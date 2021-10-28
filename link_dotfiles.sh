@@ -33,7 +33,11 @@ done
 # Link vscode settings
 #######################
 OS=$(uname)
-if [ $OS == "Linux" ]; then
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
+    WINDOWS_USER=$(powershell.exe -command '$env:Username')
+    WINDOWS_USER=${WINDOWS_USER%?}
+    VSCODE_USER_SETTINGS_FOLDER="/mnt/c/Users/$WINDOWS_USER/AppData/Roaming/Code/User"
+elif [ $OS == "Linux" ]; then
     VSCODE_USER_SETTINGS_FOLDER="$HOME/.config/Code/User"
 elif [ $OS == "Darwin" ]; then
     VSCODE_USER_SETTINGS_FOLDER="$HOME/Library/Application Support/Code/User"
@@ -48,11 +52,11 @@ if [[ -d $VSCODE_USER_SETTINGS_FOLDER ]]; then
             echo ""; echo "" # add a blank line
             if [[ $REPLY =~ ^[Yy]$ ]]; then
                 rm "$SETTINGPATH"
-                ln -s "${PWD}/vscode/$SETTINGFILE" "$SETTINGPATH"
+                cp "${PWD}/vscode/$SETTINGFILE" "$SETTINGPATH"
             fi
         else
-            echo "Linking to ${PWD}/vscode/$SETTINGFILE"
-            ln -s "${PWD}/vscode/$SETTINGFILE" "$SETTINGPATH"
+            echo "Copying to ${PWD}/vscode/$SETTINGFILE"
+            cp "${PWD}/vscode/$SETTINGFILE" "$SETTINGPATH"
             echo ""; echo "" # add a blank line
         fi
     done
