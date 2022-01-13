@@ -2,6 +2,9 @@
 # alias pip="python -m pip"
 alias dockerignore="docker image build -t build-context -f - . << 'FROM busybox\nCOPY . ./build-context\nWORKDIR /build-context/docker\nCMD find .'"
 
+# Activate venv when using poetry
+alias poetry_shell='. "$(dirname $(poetry run which python))/activate"'
+
 # Clear the terminal
 alias c="clear"
 
