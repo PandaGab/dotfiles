@@ -1,0 +1,20 @@
+# Requirements for a base environment
+# Author: Gabriel Leclerc
+
+# Jupyter Lab 
+jupyterlab
+
+# Computing & Processing
+numpy
+scipy
+pandas
+networkx
+scikit-image
+
+# Graphing
+matplotlib
+plotly
+
+# Media (image and video)
+imageio
+imageio-ffmpeg
