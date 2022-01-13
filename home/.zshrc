@@ -76,6 +76,7 @@ plugins=(
     ssh-agent
     tmux
     pyenv
+    dotenv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -112,4 +113,17 @@ source ~/.custom_functions
 
 # Setting `pyenv`
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)" # doesnt seem to be useful anymore
+
+# Created by `pipx` on 2021-11-02 19:38:32
+# Was already there
+# export PATH="$PATH:/home/galec39/.local/bin"
+# Add pipx completion
+eval "$(register-python-argcomplete pipx)"
+
+# Tell Poetry to install venv locally
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
+function zshaddhistory() {
+    echo "${1%%$'\n'}|${PWD}   " >> ~/.zsh_history_ext
+}
