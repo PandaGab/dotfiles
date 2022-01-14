@@ -22,3 +22,4 @@ imageio-ffmpeg
 # Web framework
 dash
 dash-core-components
+jupyter-dash
