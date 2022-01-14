@@ -18,3 +18,7 @@ plotly
 # Media (image and video)
 imageio
 imageio-ffmpeg
+
+# Web framework
+dash
+dash-core-components
